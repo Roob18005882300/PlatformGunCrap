@@ -141,9 +141,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             .......................
             `)
         pause(200)
-        if (info.score() > 1) {
-            info.setScore(30)
-        }
+        info.setScore(30)
     }
     if (WeaponNum == 2) {
         B = 1
