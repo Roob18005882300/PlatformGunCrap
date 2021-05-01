@@ -204,6 +204,9 @@ function ShotGunAnim () {
         `)
     info.changeScoreBy(1)
 }
+statusbars.onZero(StatusBarKind.Health, function (status) {
+	
+})
 function RifleAnim () {
     Weapon.setImage(img`
         .......................
@@ -313,17 +316,61 @@ function RifleAnim () {
         .......................
         `)
 }
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    GunMan.setImage(img`
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        `)
+    pause(500)
+    GunMan.setImage(img`
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        a a a a a a a a a a a a a a a 
+        `)
+    pause(5000)
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprite.destroy()
     if (WeaponNum == 1) {
         Zombie1Health.value += -35
+        ZombieHealthVar += -35
     }
     if (WeaponNum == 2) {
-        Zombie1Health.value += -15
+        Zombie1Health.value += -25
+        ZombieHealthVar += -25
+    }
+    if (ZombieHealthVar <= 0) {
+        otherSprite.destroy()
     }
 })
 let Shell: Sprite = null
 let projectile: Sprite = null
+let ZombieHealthVar = 0
 let Zombie1Health: StatusBarSprite = null
 let B = 0
 let Weapon: Sprite = null
@@ -349,6 +396,7 @@ GunMan = sprites.create(img`
     `, SpriteKind.Player)
 WeaponNum = 1
 controller.moveSprite(GunMan, 100, 0)
+info.setLife(100)
 tiles.setTilemap(tilemap`level1`)
 jc = 0
 let Zombie1 = sprites.create(img`
@@ -533,15 +581,10 @@ B = 0
 Zombie1Health = statusbars.create(20, 4, StatusBarKind.Health)
 Zombie1Health.value = 100
 Zombie1Health.attachToSprite(Zombie1)
+Zombie1Health.setOffsetPadding(0, 2)
+ZombieHealthVar = 100
 forever(function () {
-    GunMan.ay = 1150
-    Zombie1.ay = 1150
-})
-forever(function () {
-	
-})
-forever(function () {
-    pause(8000)
+    pause(5000)
     Zombie1 = sprites.create(img`
         7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
         7 f f f 7 7 7 7 7 7 7 7 7 7 7 7 
@@ -560,7 +603,17 @@ forever(function () {
         6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
         6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
         `, SpriteKind.Enemy)
-    Zombie1.setPosition(144, 31)
+    Zombie1.setPosition(GunMan.x + 100, 31)
+    Zombie1Health = statusbars.create(20, 4, StatusBarKind.Health)
+    Zombie1Health.value = 100
+    Zombie1Health.attachToSprite(Zombie1)
+    Zombie1Health.setOffsetPadding(0, 2)
+    ZombieHealthVar = 100
+    Zombie1.follow(GunMan, 50)
+})
+forever(function () {
+    GunMan.ay = 1150
+    Zombie1.ay = 1150
 })
 forever(function () {
     if (jc == 1) {
