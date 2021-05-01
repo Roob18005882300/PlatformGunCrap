@@ -583,6 +583,7 @@ Zombie1Health.value = 100
 Zombie1Health.attachToSprite(Zombie1)
 Zombie1Health.setOffsetPadding(0, 2)
 ZombieHealthVar = 100
+Zombie1.setFlag(SpriteFlag.GhostThroughSprites, false)
 forever(function () {
     pause(5000)
     Zombie1 = sprites.create(img`
@@ -610,6 +611,7 @@ forever(function () {
     Zombie1Health.setOffsetPadding(0, 2)
     ZombieHealthVar = 100
     Zombie1.follow(GunMan, 50)
+    Zombie1.setFlag(SpriteFlag.GhostThroughSprites, false)
 })
 forever(function () {
     GunMan.ay = 1150
