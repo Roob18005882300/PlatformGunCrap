@@ -14,6 +14,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.WeaponG, function (sprite, otherSprite) {
     otherSprite.destroy()
+    game.splash("Shotgun lasts for 20 seconds.")
     WeaponNum = 2
     info.setScore(8)
     Weapon.setImage(img`
@@ -33,8 +34,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.WeaponG, function (sprite, other
         ..........................
         ..........................
         `)
-    pause(40000)
-    game.splash("Shotgun lasts for 40 seconds.")
+    pause(20000)
     WeaponNum = 1
     Weapon.setImage(img`
         .......................
@@ -350,12 +350,6 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, othe
     if (BossHPVar <= 0) {
         B = 1
         juifhvsydrbeg = 1
-        scene.cameraShake(2, 2000)
-        scene.cameraShake(3, 2000)
-        scene.cameraShake(4, 2000)
-        scene.cameraShake(5, 3500)
-        pause(2600)
-        music.bigCrash.play()
         Boss.setImage(img`
             ................................................................
             ................................................................
@@ -422,6 +416,11 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, othe
             ................................................................
             ................................................................
             `)
+        scene.cameraShake(2, 2000)
+        scene.cameraShake(3, 2000)
+        scene.cameraShake(4, 2000)
+        scene.cameraShake(5, 3500)
+        music.bigCrash.play()
         pause(1000)
         Boss.setImage(img`
             ................................................................
@@ -489,6 +488,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, othe
             ................................................................
             ................................................................
             `)
+        pause(1000)
         game.over(true)
     }
 })
@@ -762,7 +762,7 @@ let GunMan: Sprite = null
 game.splash("Start Game?")
 game.splash("A to shoot | B to reload")
 game.splash("Zombies increase in strength through out levels")
-game.splash("Expect bugs and (Not a lot of) unfinished stuff :)")
+game.splash("Expect Bugs :)")
 GunMan = sprites.create(img`
     a a a a a a a a a a a a a a a 
     a a a a a a a a a a a a a a a 
@@ -1194,7 +1194,7 @@ forever(function () {
 })
 forever(function () {
     if (Level == 2 && juifhvsydrbeg == 0) {
-        pause(5000)
+        pause(3000)
         BossAttck = randint(1, 2)
         pause(100)
         BossAttck = 0
