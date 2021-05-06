@@ -4,7 +4,8 @@
     "dependencies": {
         "device": "*",
         "controller": "*",
-        "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.1"
+        "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.1",
+        "Gun Platformer:The sequal": "github:roob18005882300/gun-platformerthe-sequal#master"
     },
     "files": [
         "main.blocks",
